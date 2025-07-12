@@ -31,4 +31,12 @@ public class GenreService {
 
         return genreAttempt.get();
     }
+
+    public void deleteById(Integer id) {
+        genreRepository.deleteById(id);
+    }
+
+    public void delete(Genre genre) {
+        deleteById(genre.getId());
+    }
 }

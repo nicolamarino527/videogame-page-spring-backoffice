@@ -32,6 +32,11 @@
                     <td>
                         <a th:href="@{/videogames/edit/{id}(id=*{id})}" class="btn btn-primary btn-sm">edit</a>
                     </td>
+                    <td>
+                        <form th:action="@{/videogames/delete/{id}(id=*{id})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">delete</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>

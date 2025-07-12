@@ -97,4 +97,11 @@ public class VideogameController {
         return "redirect:/videogames";
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        videogameService.deleteById(id);
+
+        return "redirect:/videogames";
+    }
+
 }

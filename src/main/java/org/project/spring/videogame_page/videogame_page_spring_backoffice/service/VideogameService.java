@@ -40,4 +40,12 @@ public class VideogameService {
     public Videogame update(Videogame videogame) {
         return videogameRepository.save(videogame);
     }
+
+    public void deleteById(Integer id) {
+        videogameRepository.deleteById(id);
+    }
+
+    public void delete(Videogame videogame) {
+        deleteById(videogame.getId());
+    }
 }

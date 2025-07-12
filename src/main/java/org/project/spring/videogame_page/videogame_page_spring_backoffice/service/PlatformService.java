@@ -31,4 +31,12 @@ public class PlatformService {
 
         return platformAttempt.get();
     }
+
+    public void deleteById(Integer id) {
+        platformRepository.deleteById(id);
+    }
+
+    public void delete(Platform platform) {
+        deleteById(platform.getId());
+    }
 }
