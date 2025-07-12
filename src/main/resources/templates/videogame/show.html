@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Game deteails</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('videogames')}"></div>
+
+    <section class="container mt-4 col-12">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card mb-3" style="width: 55rem;" th:object="${videogame}">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img th:src="*{coverImage}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 th:text="*{title}" class="card-title"></h3>
+                            card with
+                            supporting text below as a natural
+                            lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text" th:text="'Relese date: '+ *{releaseDate}"><small
+                                    class="text-body-secondary">
+                            </p>
+                            <p th:text="'Description: ' + *{description}" class="card-text"></p>
+                            <th:block th:if="*{genres.size() > 0}">
+                                <h4 class="mb-3">Genres:</h4>
+                                <ul class="mb-3 ps-4">
+                                    <li th:each="genre : *{genres}" th:text="${genre.name}"></li>
+                                </ul>
+                            </th:block>
+                            <th:block th:if="*{platforms.size() > 0}">
+                                <h4 class="mb-3">Available for:</h4>
+                                <ul class="mb-3 ps-4">
+                                    <li th:each="platform : *{platforms}" th:text="${platform.name}"></li>
+                                </ul>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</body>
+
+</html>

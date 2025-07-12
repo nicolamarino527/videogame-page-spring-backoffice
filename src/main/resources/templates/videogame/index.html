@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <title>Game list</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('videogames')}"></div>
+    <section class="container mt-4">
+        <h2>Game List</h2>
+        <table class="table table-striped" th:if="${videogames.size() > 0}">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titles</th>
+                    <th>Release date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="videogame : ${videogames}" th:object="${videogame}">
+                    <td>[[*{id}]]</td>
+                    <td>[[*{title}]]</td>
+                    <td>[[*{releaseDate}]]</td>
+                    <td>
+                        <a th:href="@{/videogames/{id}(id=*{id})}" class="btn btn-success btn-sm">Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p th:if="${videogames.size() == 0}"
+            th:text="'No games available on the platform at the moment please try later.'"></p>
+    </section>
+</body>
+
+</html>

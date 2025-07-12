@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <title>add game</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('videogame')}"></div>
+    <section class="container">
+        <div class="row">
+            <div class="col-12">
+                <th:block>
+                    <h1 class="py-4 mb-2 text-center">Add a new game</h1>
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form th:action="@{/videogames/create}" th:object="${videogame}" method="post">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" th:field="*{title}" class="form-control" id="title"
+                                        placeholder="Enter game title">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="releaseDate" class="form-label">Release Date</label>
+                                    <input type="date" th:field="*{releaseDate}" class="form-control"
+                                        id="releaseDate" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea th:field="*{description}" class="form-control" id="description"
+                                        rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Genres</label>
+                                    <div>
+                                        <div th:each="g : ${genres}" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:id="'genre-' + ${g.id}"
+                                                th:name="genres" th:value="${g.id}"
+                                                th:checked="${videogame.genres.contains(g)}" />
+                                            <label class="form-check-label" th:for="'genre-' + ${g.id}"
+                                                th:text="${g.name}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Platforms</label>
+                                    <div>
+                                        <div th:each="p : ${platforms}" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                th:id="'platform-' + ${p.id}" th:name="platforms" th:value="${p.id}"
+                                                th:checked="${videogame.platforms.contains(p)}" />
+                                            <label class="form-check-label" th:for="'platform-' + ${p.id}"
+                                                th:text="${p.name}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
