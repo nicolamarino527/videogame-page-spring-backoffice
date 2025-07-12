@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <title>Home</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('home')}"></div>
+
+    <div class="container">
+        <div class="col-12 pt-3">
+            <h1>home</h1>
+            <hr>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum sequi odio velit? Vitae repellendus
+                dolore
+                eos
+                neque itaque ipsum quod qui, aperiam sint impedit, earum, deserunt placeat voluptatem hic perspiciatis.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
