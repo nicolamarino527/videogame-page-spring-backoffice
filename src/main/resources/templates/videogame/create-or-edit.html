@@ -17,7 +17,9 @@
                     <h1 class="py-4 mb-2 text-center">Add a new game</h1>
                     <div class="row justify-content-center">
                         <div class="col-8">
-                            <form th:action="@{/videogames/create}" th:object="${videogame}" method="post">
+                            <form
+                                th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}"
+                                th:object="${videogame}" method="post">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" th:field="*{title}" class="form-control" id="title"

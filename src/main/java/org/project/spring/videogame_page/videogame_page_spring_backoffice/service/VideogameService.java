@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.Videogame;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.repository.VideogameRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class VideogameService {
@@ -25,13 +27,17 @@ public class VideogameService {
         Optional<Videogame> videogameAttempt = videogameRepository.findById(id);
 
         if (videogameAttempt.isEmpty()) {
-
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game not found with id: " + id);
         }
 
         return videogameAttempt.get();
     }
 
     public Videogame create(Videogame videogame) {
+        return videogameRepository.save(videogame);
+    }
+
+    public Videogame update(Videogame videogame) {
         return videogameRepository.save(videogame);
     }
 }

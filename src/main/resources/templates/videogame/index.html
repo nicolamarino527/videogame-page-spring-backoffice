@@ -29,9 +29,16 @@
                     <td>
                         <a th:href="@{/videogames/{id}(id=*{id})}" class="btn btn-success btn-sm">Details</a>
                     </td>
+                    <td>
+                        <a th:href="@{/videogames/edit/{id}(id=*{id})}" class="btn btn-primary btn-sm">edit</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <div class="mb-3 d-flex">
+            <a th:href="@{/videogames/create}" class="me-auto btn btn-primary btn-sm">
+                Add new game</a>
+        </div>
 
         <p th:if="${videogames.size() == 0}"
             th:text="'No games available on the platform at the moment please try later.'"></p>
