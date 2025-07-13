@@ -36,6 +36,14 @@ public class GenreService {
         genreRepository.deleteById(id);
     }
 
+    public Genre create(Genre genre) {
+        return genreRepository.save(genre);
+    }
+
+    public Genre update(Genre genre) {
+        return genreRepository.save(genre);
+    }
+
     public void delete(Genre genre) {
         deleteById(genre.getId());
     }

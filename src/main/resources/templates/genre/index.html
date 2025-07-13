@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <title>Game list</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('genre')}"></div>
+    <section class="container mt-4">
+        <h2>Game genres</h2>
+        <table class="table table-striped" th:if="${genres.size() > 0}">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="genre : ${genres}" th:object="${genre}">
+                    <td>[[*{id}]]</td>
+                    <td>[[*{name}]]</td>
+                    <td>
+                        <a th:href="@{/genres/edit/{id}(id=*{id})}" class="btn btn-primary btn-sm">edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/genres/delete/{id}(id=*{id})}"
+                            onclick="return confirm('Are you sure you want to delete the genre?');" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>orm>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mb-3 d-flex">
+            <a th:href="@{/genres/create}" class="me-auto btn btn-primary btn-sm">
+                Add genre</a>
+        </div>
+
+        <p th:if="${genres.size() == 0}" th:text="'No games available on the platform at the moment please try later.'">
+        </p>
+    </section>
+</body>
+
+</html>

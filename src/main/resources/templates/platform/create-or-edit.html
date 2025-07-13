@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <title>add game</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('platform')}"></div>
+    <section class="container">
+        <div class="row">
+            <div class="col-12">
+                <th:block>
+                    <h1 class="py-4 mb-2 text-center" th:if="${edit}">Edit platform</h1>
+                    <h1 class="py-4 mb-2 text-center" th:unless="${edit}">Add a new platform</h1>
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form
+                                th:action="${edit} ? @{/platforms/edit/{id}(id=${platform.id})} : @{/platforms/create}"
+                                th:object="${platform}" method="post">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" th:field="*{name}" class="form-control" id="title"
+                                        placeholder="Enter game title">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

@@ -14,12 +14,13 @@
         <div class="row">
             <div class="col-12">
                 <th:block>
-                    <h1 class="py-4 mb-2 text-center">Add a new game</h1>
                     <div class="row justify-content-center">
                         <div class="col-8">
                             <form
                                 th:action="${edit} ? @{/videogames/edit/{id}(id=${videogame.id})} : @{/videogames/create}"
                                 th:object="${videogame}" method="post">
+                                <h1 class="py-4 mb-2 text-center" th:if="${edit}">Edit game</h1>
+                                <h1 class="py-4 mb-2 text-center" th:unless="${edit}">Add a new game</h1>
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" th:field="*{title}" class="form-control" id="title"
@@ -60,6 +61,10 @@
                                                 th:checked="${videogame.platforms.contains(p)}" />
                                             <label class="form-check-label" th:for="'platform-' + ${p.id}"
                                                 th:text="${p.name}"></label>
+                                            <label for="myCheckbox"
+                                                class="position-absolute top-0 start-50 translate-middle-x text-primary fw-bold"
+                                                style="font-size: 26px;">
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
