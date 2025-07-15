@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div th:replace="~{fragments/navbar :: navbar('videogames')}"></div>
+    <div th:replace="~{fragments/navbar :: navbar('Games')}"></div>
     <section class="container mt-4">
         <h2>Game List</h2>
         <table class="table table-striped" th:if="${videogames.size() > 0}">
@@ -29,10 +29,10 @@
                     <td>
                         <a th:href="@{/videogames/{id}(id=*{id})}" class="btn btn-success btn-sm">Details</a>
                     </td>
-                    <td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
                         <a th:href="@{/videogames/edit/{id}(id=*{id})}" class="btn btn-primary btn-sm">edit</a>
                     </td>
-                    <td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
                         <form th:action="@{/videogames/delete/{id}(id=*{id})}"
                             onclick="return confirm('Are you sure you want to delete the game?');" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">delete</button>

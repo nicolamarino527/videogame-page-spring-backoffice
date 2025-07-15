@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div th:replace="~{fragments/navbar :: navbar('genre')}"></div>
+    <div th:replace="~{fragments/navbar :: navbar('Genres')}"></div>
     <section class="container mt-4">
         <h2>Game genres</h2>
         <table class="table table-striped" th:if="${genres.size() > 0}">
@@ -32,7 +32,7 @@
                             onclick="return confirm('Are you sure you want to delete the genre?');" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
-                    </td>orm>
+                    </td>
                     </td>
                 </tr>
             </tbody>
@@ -41,6 +41,7 @@
             <a th:href="@{/genres/create}" class="me-auto btn btn-primary btn-sm">
                 Add genre</a>
         </div>
+
 
         <p th:if="${genres.size() == 0}" th:text="'No games available on the platform at the moment please try later.'">
         </p>

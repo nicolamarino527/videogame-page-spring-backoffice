@@ -3,6 +3,7 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.secur
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -23,13 +24,22 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/videogames/create", "/videogame/edit/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/videogames/**").hasAuthority("ADMIN")
+                .requestMatchers("/genres", "/genres/**").hasAuthority("ADMIN")
+                .requestMatchers("/platforms", "/platforms/**").hasAuthority("ADMIN")
+                .requestMatchers("/videogames", "/videogames/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/**").permitAll())
+
                 .formLogin(form -> form
+                        .loginPage("/login")
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll())
-                .csrf(csrf -> csrf.disable());
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/"))
+                .exceptionHandling(ex -> ex
+                        .accessDeniedPage("/access-denied"));
         return http.build();
 
     }

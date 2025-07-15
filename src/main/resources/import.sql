@@ -4,5 +4,5 @@ INSERT INTO videogames (id, title, cover_image, release_date, description) VALUE
 INSERT INTO genre_videogames (videogame_id, genre_id) VALUES (1, 3), (2, 4), (3, 1), (3, 3), (4, 5), (5, 6), (6, 7), (7, 1), (7, 2),(8, 3), (9, 3), (10, 1), (10, 2), (11, 9), (12, 1), (12, 7), (13, 5),(14, 7), (15, 10), (16, 5), (17, 6), (18, 8), (19, 8), (20, 10),(21, 1), (21, 2), (22, 5), (23, 1), (24, 10), (25, 9), (26, 3),(27, 4),(28, 1), (28, 2), (29, 5), (30, 7), (30, 8);
 INSERT INTO platform_videogame (videogame_id, platform_id) VALUES (1, 1), (1, 2), (1, 3),(2, 2), (2, 3),(3, 1), (3, 2),(4, 1), (4, 2), (4, 3),(5, 1), (5, 2), (5, 3), (5, 4),(6, 1), (6, 2), (6, 4),(7, 4),(8, 1), (8, 2),(9, 1), (9, 2), (9, 3),(10, 1), (10, 2), (10, 3),(11, 2),(12, 1),(13, 1), (13, 2), (13, 3),(14, 1), (14, 4),(15, 1), (15, 4),(16, 1), (16, 2), (16, 3),(17, 1), (17, 2), (17, 3),(18, 1), (19, 1),(21, 2),(22, 1), (22, 2), (22, 3),(23, 2),(24, 4),(25, 4),(26, 1), (26, 2),(27, 1), (27, 2),(28, 2),(29, 4),(30, 4);
 INSERT INTO roles (name) VALUES ('USER'), ('ADMIN');
-INSERT INTO role_user (role_id, user_id) VALUES (1,1), (2,2);
 INSERT INTO users (user_name, password) VALUES ('piero','{noop}123456'),('angela', '{noop}654321');
+INSERT INTO role_user (role_id, user_id) VALUES (1,1), (2,2);

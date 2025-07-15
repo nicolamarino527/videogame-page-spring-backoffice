@@ -6,6 +6,7 @@ import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.GenreService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.PlatformService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.VideogameService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,9 +35,10 @@ public class VideogameController {
     }
 
     @GetMapping
-    public String index(Model model) {
+    public String index(Authentication authentication, Model model) {
         List<Videogame> videogames = videogameService.findAll();
         model.addAttribute("videogames", videogames);
+        model.addAttribute("username", authentication.getName());
 
         return "videogame/index";
     }

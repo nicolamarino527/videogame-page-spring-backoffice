@@ -10,7 +10,22 @@ public class HomeController {
 
     @GetMapping
     public String home() {
-        return "home";
+        return "pages/home";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "pages/login";
+    }
+
+    @GetMapping("/info")
+    public String info() {
+        return "pages/info";
+    }
+
+    @GetMapping("/access-denied")
+    public String denied() {
+        return "pages/access-denied";
     }
 
 }

@@ -9,21 +9,37 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/}">Home</a>
+                        <a class="nav-link" th:classappend="${activePage == 'home'} ? ' active'" th:href="@{/}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/videogames}">Games</a>
+                        <a class="nav-link" th:classappend="${activePage == 'Games'} ? ' active'"
+                            th:href="@{/videogames}">Games</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'Genres'} ? ' active'"
+                            th:href="@{/genres}">Genres</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'Platforms'} ? ' active'"
+                            th:href="@{/platforms}">Platforms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/genres}">Genres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/platforms}">Platforms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">info</a>
+                        <a class="nav-link" th:classappend="${activePage == 'Info'} ? ' active'"
+                            th:href="@{/info}">Info</a>
                     </li>
                 </ul>
+            </div>
+            <div class="user-info">
+                <div sec:authorize="isAuthenticated()">
+                    Logged user: <span sec:authentication="name" class="fw-bold me-2"></span>
+                    Role: <span sec:authentication="principal.authorities" class="fw-bold me-2"></span>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Sign out</button>
+                    </form>
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <a class="btn btn-sm btn-outline-primary" th:href="@{/login}">Sign in</a>
+                </div>
             </div>
         </div>
     </nav>
