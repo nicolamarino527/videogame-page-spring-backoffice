@@ -48,4 +48,16 @@ public class VideogameService {
     public void delete(Videogame videogame) {
         deleteById(videogame.getId());
     }
+
+    public Optional<Videogame> findById(Integer id) {
+        return videogameRepository.findById(id);
+    }
+
+    public Boolean existsById(Integer id) {
+        return videogameRepository.existsById(id);
+    }
+
+    public Boolean existsById(Videogame videogame) {
+        return existsById(videogame.getId());
+    }
 }
