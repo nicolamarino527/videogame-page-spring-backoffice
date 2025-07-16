@@ -2,7 +2,10 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.model
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -41,13 +45,9 @@ public class Videogame {
     @JoinTable(name = "genre_videogames", joinColumns = @JoinColumn(name = "videogame_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres = new HashSet<>();
 
-    public Set<Genre> getGenres() {
-        return this.genres;
-    }
-
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
-    }
+    @OneToMany(mappedBy = "videogame")
+    @JsonManagedReference
+    private List<Discussion> discussions;
 
     public Integer getId() {
         return this.id;
@@ -95,6 +95,22 @@ public class Videogame {
 
     public void setPlatforms(Set<Platform> platforms) {
         this.platforms = platforms;
+    }
+
+    public Set<Genre> getGenres() {
+        return this.genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public List<Discussion> getDiscussions() {
+        return this.discussions;
+    }
+
+    public void setDiscussions(List<Discussion> discussions) {
+        this.discussions = discussions;
     }
 
 }

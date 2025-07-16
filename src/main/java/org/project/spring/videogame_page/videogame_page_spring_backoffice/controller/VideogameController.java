@@ -2,7 +2,9 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.contr
 
 import java.util.List;
 
+import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.Discussion;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.Videogame;
+import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.DiscussionService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.GenreService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.PlatformService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.VideogameService;
@@ -23,15 +25,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/videogames")
 public class VideogameController {
 
-    private PlatformService platformService;
-    private VideogameService videogameService;
-    GenreService genreService;
+    private final PlatformService platformService;
+    private final VideogameService videogameService;
+    private final GenreService genreService;
+    private final DiscussionService discussionService;
 
     public VideogameController(PlatformService platformService,
-            VideogameService videogameService, GenreService genreService) {
+            VideogameService videogameService, GenreService genreService,
+            DiscussionService discussionService) {
         this.platformService = platformService;
         this.videogameService = videogameService;
         this.genreService = genreService;
+        this.discussionService = discussionService;
     }
 
     @GetMapping
@@ -47,6 +52,13 @@ public class VideogameController {
     public String show(Model model, @PathVariable("id") Integer gameId) {
         Videogame videogame = videogameService.getById(gameId);
         model.addAttribute("videogame", videogame);
+
+        List<Discussion> discussions = discussionService.findByVideogameId(gameId);
+        model.addAttribute("discussions", discussions);
+
+        Discussion newDiscussion = new Discussion();
+        newDiscussion.setVideogame(videogame);
+        model.addAttribute("discussion", newDiscussion);
 
         return "videogame/show";
     }
@@ -106,4 +118,15 @@ public class VideogameController {
         return "redirect:/videogames";
     }
 
+    // @GetMapping("/{id}/discussion")
+    // public String showDiscussions(@PathVariable("id") Integer id, Model model) {
+    // var videogame = videogameService.getById(id);
+
+    // model.addAttribute("videogame", videogame);
+    // model.addAttribute("discussions", videogame.getDiscussions());
+    // model.addAttribute("discussion", new Discussion());
+
+    // return "discussion/create-or-edit";
+
+    // }
 }

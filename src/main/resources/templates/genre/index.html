@@ -8,16 +8,17 @@
     <title>Game list</title>
 </head>
 
-<body>
+<body class="bg-dark text-white">
     <div th:replace="~{fragments/navbar :: navbar('Genres')}"></div>
     <section class="container mt-4">
         <h2>Game genres</h2>
-        <table class="table table-striped" th:if="${genres.size() > 0}">
+        <table class="table table-striped table-dark" th:if="${genres.size() > 0}">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>name</th>
-                    <th>Actions</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>

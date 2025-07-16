@@ -8,12 +8,13 @@
     <title>Game deteails</title>
 </head>
 
-<body>
+
+<body class="bg-dark text-white">
     <div th:replace="~{fragments/navbar :: navbar('Games')}"></div>
 
     <section class="container mt-4 col-12">
-        <div class="col-12 d-flex justify-content-center">
-            <div class="card mb-3" style="width: 55rem;" th:object="${videogame}">
+        <div class="col-12 d-flex justify-content-center mb-5">
+            <div class="card mb-3 bg-black text-white" style="width: 55rem;" th:object="${videogame}">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img th:src="*{coverImage}" class="img-fluid rounded-start" alt="...">
@@ -21,12 +22,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h3 th:text="*{title}" class="card-title"></h3>
-                            card with
-                            supporting text below as a natural
-                            lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text" th:text="'Relese date: '+ *{releaseDate}"><small
-                                    class="text-body-secondary">
-                            </p>
+                            <p class="card-text" th:text="'Release date: ' + *{releaseDate}"></p>
                             <p th:text="'Description: ' + *{description}" class="card-text"></p>
                             <th:block th:if="*{genres.size() > 0}">
                                 <h4 class="mb-3">Genres:</h4>
@@ -40,13 +36,48 @@
                                     <li th:each="platform : *{platforms}" th:text="${platform.name}"></li>
                                 </ul>
                             </th:block>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+        <section class="container mt-4 col-8">
+            <h4>Discussions</h4>
+            <div th:if="${discussions != null and #lists.isEmpty(discussions) == false}">
+                <div class="card-body">
+                    <div th:each="discussion : ${discussions}" class="card mb-3 bg-black text-white">
+                        <div class="card-body">
+                            <h5 th:text="${discussion.title}" class="card-title"></h5>
+                            <p th:text="${discussion.content}" class="card-text"></p>
+                            <p class="text-secondary mb-0">
+                                Posted on: <span
+                                    th:text="${#temporals.format(discussion.date, 'dd/MM/yyyy - HH:mm')}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${discussions == null or #lists.isEmpty(discussions)}">
+                    <p>No discussions yet.</p>
+                </div>
+        </section>
+        <hr>
+        <section class="container mt-4 col-8">
+            <div class="mt-4 ">
+                <h5>Add a new discussion:</h5>
+                <form th:action="@{'/discussions/create/' + ${videogame.id}}" th:object="${discussion}" method="post">
+                    <div class="mb-3">
+                        <input type="hidden" th:field="*{videogame.id}" />
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" id="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea th:field="*{content}" class="form-control" id="content" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post discussion</button>
+                </form>
+            </div>
+        </section>
     </section>
 </body>
 
