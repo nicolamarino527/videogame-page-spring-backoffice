@@ -2,6 +2,8 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.model
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +28,21 @@ public class Discussion {
     private LocalDateTime date;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "videogame_id", nullable = false)
     private Videogame videogame;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return this.id;

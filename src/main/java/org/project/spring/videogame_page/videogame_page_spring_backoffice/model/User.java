@@ -2,6 +2,8 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.model
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class User {
 
     @NotBlank(message = "Password cannot be blank, empty or null")
     @Size(min = 6, max = 13, message = "The password must have at least 6 characters")
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

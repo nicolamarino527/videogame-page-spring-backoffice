@@ -50,6 +50,9 @@
                             <h5 th:text="${discussion.title}" class="card-title"></h5>
                             <p th:text="${discussion.content}" class="card-text"></p>
                             <p class="text-secondary mb-0">
+                                By: <span th:text="${discussion.user.userName}"></span>
+                            </p>
+                            <p class="text-secondary mb-0">
                                 Posted on: <span
                                     th:text="${#temporals.format(discussion.date, 'dd/MM/yyyy - HH:mm')}"></span>
                             </p>
