@@ -22,8 +22,8 @@
                     <th>Titles</th>
                     <th>Release date</th>
                     <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
                 </tr>
             </thead>
             <tbody>
