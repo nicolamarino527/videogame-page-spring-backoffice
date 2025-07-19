@@ -60,4 +60,8 @@ public class VideogameService {
     public Boolean existsById(Videogame videogame) {
         return existsById(videogame.getId());
     }
+
+    public List<Videogame> findBySearchingTitle(String title) {
+        return videogameRepository.findByTitleContainingIgnoreCase(title);
+    }
 }
