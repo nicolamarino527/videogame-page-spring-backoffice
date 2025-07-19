@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -40,5 +41,13 @@ public class VideogameRestController {
 
         return new ResponseEntity<Videogame>(videogameAttempt.get(), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/search")
+    public List<Videogame> searchByTitle(@RequestParam("title") String title) {
+        if (title == null || title.trim().isEmpty()) {
+            return videogameService.findAll();
+        }
+        return videogameService.findBySearchingTitle(title);
     }
 }
