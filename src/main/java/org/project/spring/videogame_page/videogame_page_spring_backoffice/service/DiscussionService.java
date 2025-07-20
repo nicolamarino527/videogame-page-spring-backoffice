@@ -51,4 +51,13 @@ public class DiscussionService {
         discussion.setDate(LocalDateTime.now());
         return discussionRepository.save(discussion);
     }
+
+    public void delete(Integer id) {
+        discussionRepository.deleteById(id);
+    }
+
+    public Discussion getByIdDiscussion(Integer id) {
+        return discussionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Discussion not found"));
+    }
 }

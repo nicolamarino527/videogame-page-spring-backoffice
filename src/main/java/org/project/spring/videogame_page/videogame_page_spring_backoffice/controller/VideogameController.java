@@ -50,9 +50,10 @@ public class VideogameController {
     }
 
     @GetMapping("/{id}")
-    public String show(Model model, @PathVariable("id") Integer gameId) {
+    public String show(Model model, @PathVariable("id") Integer gameId, Authentication authentication) {
         Videogame videogame = videogameService.getById(gameId);
         model.addAttribute("videogame", videogame);
+        model.addAttribute("username", authentication.getName());
 
         List<Discussion> discussions = discussionService.findByVideogameId(gameId);
         model.addAttribute("discussions", discussions);
