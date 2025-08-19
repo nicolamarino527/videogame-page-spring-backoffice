@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,7 +46,7 @@ public class Videogame {
     @JoinTable(name = "genre_videogames", joinColumns = @JoinColumn(name = "videogame_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres = new HashSet<>();
 
-    @OneToMany(mappedBy = "videogame")
+    @OneToMany(mappedBy = "videogame", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Discussion> discussions;
 

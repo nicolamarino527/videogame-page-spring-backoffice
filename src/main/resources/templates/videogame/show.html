@@ -17,13 +17,18 @@
             <div class="card mb-3 bg-black text-white" style="width: 55rem;" th:object="${videogame}">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img th:src="*{coverImage}" class="img-fluid rounded-start" alt="...">
+                        <img th:src="*{coverImage}" class="img-fluid w-100 h-100 rounded-start"
+                            style="object-fit: cover;" alt=" No
+                            image aviable">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h3 th:text="*{title}" class="card-title"></h3>
-                            <p class="card-text" th:text="'Release date: ' + *{releaseDate}"></p>
-                            <p th:text="'Description: ' + *{description}" class="card-text"></p>
+                            <p class="card-text"
+                                th:text="*{releaseDate} != null ? 'Release date: ' + *{releaseDate} : 'Release date: Unknown'">
+                            </p>
+                            <p th:text="'Description: ' + *{description} != null ? 'Description: ' + *{description} : 'Description: Unknown' "
+                                class="card-text"></p>
                             <th:block th:if="*{genres.size() > 0}">
                                 <h4 class="mb-3">Genres:</h4>
                                 <ul class="mb-3 ps-4">
@@ -56,6 +61,10 @@
                                 Posted on: <span
                                     th:text="${#temporals.format(discussion.date, 'dd/MM/yyyy - HH:mm')}"></span>
                             </p>
+                            <form sec:authorize="hasAuthority('ADMIN')" th:action=" @{'/discussions/delete/' +
+                                ${discussion.id}}" method="post" class="mt-2">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>

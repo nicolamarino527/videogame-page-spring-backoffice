@@ -6,6 +6,7 @@ import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.User;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.repository.UserRepository;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.DiscussionService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,22 +53,15 @@ public class DiscussionController {
         return "redirect:/videogames/" + videogameId;
     }
 
-    // @GetMapping("/edit/{id}")
-    // public String edit(@PathVariable Integer id, Model model) {
-    // model.addAttribute("discussion", discussionService.getById(id));
-    // model.addAttribute("edit", true);
-    // return "discussions/create-or-edit";
-    // }
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, Authentication authentication) {
+        Discussion discussion = discussionService.getById(id);
 
-    // @PostMapping("/edit/{id}")
-    // public String update(@Valid @ModelAttribute("discussion") Discussion
-    // discussion, BindingResult bindingResult,
-    // Model model) {
-    // if (bindingResult.hasErrors()) {
-    // return "discussion/create-or-edit";
-    // }
+        Integer videogameId = discussion.getVideogame().getId();
 
-    // discussionService.create(discussion);
-    // return "redirect:/videogames/" + discussion.getVideogame().getId();
-    // }
+        discussionService.deleteById(id);
+
+        return "redirect:/videogames/" + videogameId;
+    }
+
 }

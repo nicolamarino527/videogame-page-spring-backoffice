@@ -37,7 +37,7 @@
                 <tr th:each="videogame : ${videogames}" th:object="${videogame}">
                     <td>[[*{id}]]</td>
                     <td>[[*{title}]]</td>
-                    <td>[[*{releaseDate}]]</td>
+                    <td th:text="*{releaseDate} != null ? *{releaseDate} : 'Unknown'"></td>
                     <td>
                         <a th:href="@{/videogames/{id}(id=*{id})}" class="btn btn-success btn-sm">Details</a>
                     </td>

@@ -3,7 +3,9 @@ package org.project.spring.videogame_page.videogame_page_spring_backoffice.contr
 import java.util.List;
 import java.util.Optional;
 
+import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.Genre;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.model.Videogame;
+import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.GenreService;
 import org.project.spring.videogame_page.videogame_page_spring_backoffice.service.VideogameService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class VideogameRestController {
 
     private final VideogameService videogameService;
+    private final GenreService genreService;
 
-    VideogameRestController(VideogameService videogameService) {
+    VideogameRestController(VideogameService videogameService, GenreService genreService) {
         this.videogameService = videogameService;
+        this.genreService = genreService;
     }
 
     @GetMapping
@@ -50,4 +54,11 @@ public class VideogameRestController {
         }
         return videogameService.findBySearchingTitle(title);
     }
+
+    @GetMapping("/genres")
+    public List<Genre> genreIndex() {
+        List<Genre> genres = genreService.findAll();
+        return genres;
+    }
+
 }
